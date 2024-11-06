@@ -15,11 +15,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderPositions
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,7 +41,9 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-                    DemoScreen()
+                    Column {
+                        FunctionA()
+                    }
                 }
             }
         }
@@ -92,21 +97,21 @@ fun DemoScreen() {
         mutableStateOf(20f)
     }
 
-    val handlePositionChange = {position : Float ->
+    val handlePositionChange = { position: Float ->
         sliderPosition = position
     }
 
     /*
         Flutter의 Column과 같음.
      */
-    Column (
+    Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
-    )  {
+    ) {
         DemoText(message = "Welcom to Compose", fontSize = sliderPosition)
         Spacer(modifier = Modifier.height(150.dp))
-        
+
         DemoSlider(
             sliderPositions = sliderPosition,
             onPositionChange = handlePositionChange
@@ -117,6 +122,49 @@ fun DemoScreen() {
             text = sliderPosition.toInt().toString() + "sp"
         )
     }
-        
-    
+}
+
+@Composable
+fun MyTextField() {
+    var textState by remember {
+        mutableStateOf("")
+    }
+
+    val onTextChange = { text: String -> textState = text }
+
+    TextField(
+        value = textState,
+        onValueChange = onTextChange
+    )
+}
+
+@Composable
+fun FunctionA() {
+    /*
+        rememberSavaeable
+        화면전환이나 환경설정 변경 시 remembersaveable을 사용하여 상태값을 유지한다.
+     */
+    var switchState by rememberSaveable {
+        mutableStateOf(true)
+    }
+
+    val onSwitchChange = { value : Boolean ->
+        switchState = value
+        println("### switchState : $switchState")
+    }
+    /*
+        FunctionA에 저장된 상ㅅ태는 자식 컴포저블 함수에 의해 직접 변경되어선 안된다.
+     */
+    FunctionB(
+        switchState = switchState,
+        onSwitchChange = onSwitchChange
+    )
+}
+
+@Composable
+fun FunctionB(switchState: Boolean , onSwitchChange : (Boolean) -> Unit) {
+    Switch(
+        checked = switchState,
+        onCheckedChange = onSwitchChange
+    )
 }
