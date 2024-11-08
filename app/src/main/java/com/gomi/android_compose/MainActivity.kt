@@ -1,10 +1,12 @@
 package com.gomi.android_compose
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -39,10 +41,17 @@ class MainActivity : ComponentActivity() {
         setContent {
             AndroidComposeTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    Column {
-                        FunctionA()
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            darkPreview()
+                        }
                     }
                 }
             }
@@ -167,4 +176,10 @@ fun FunctionB(switchState: Boolean , onSwitchChange : (Boolean) -> Unit) {
         checked = switchState,
         onCheckedChange = onSwitchChange
     )
+}
+
+@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES) //다크 모드에서 UI가 어떻게 보이는지를 확인
+@Composable
+fun darkPreview() {
+    CompositionLocalEx.CompositionLocal.composable1()
 }
