@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            darkPreview()
+                            SlotApiEx.SlotApiExample.mainScreen()
                         }
                     }
                 }
