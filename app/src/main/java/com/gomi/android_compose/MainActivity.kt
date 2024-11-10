@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            ComposeModifier.ComposeMody.demoScreen()
+                            RowColDemo.RowCol.mainScreen()
                         }
                     }
                 }
