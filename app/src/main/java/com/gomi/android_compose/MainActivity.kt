@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            SlotApiEx.SlotApiExample.mainScreen()
+                            ComposeModifier.ComposeMody.demoScreen()
                         }
                     }
                 }
