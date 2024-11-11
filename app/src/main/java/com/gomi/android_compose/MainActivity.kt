@@ -43,16 +43,10 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
                         Column(
-                            horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            BoxContainer.BoxContainerEx.mainScreen()
+                            CustomLayoutModifier.CLM.mainScreen()
                         }
-                    }
                 }
             }
         }
