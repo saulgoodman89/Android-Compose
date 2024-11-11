@@ -43,9 +43,8 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                        Column(
-                        ) {
-                            CustomLayoutModifier.CLM.mainScreen()
+                        Column {
+                            CustomLayout.CustomLayoutEx.mainScreen()
                         }
                 }
             }
