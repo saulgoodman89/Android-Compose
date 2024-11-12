@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                         Column {
-                            CustomLayout.CustomLayoutEx.mainScreen()
+                            ListAndGrid.ListAndGridEx.mainScreen()
                         }
                 }
             }

@@ -22,6 +22,7 @@ class ConstraintLayout {
     object ConstraintLayoutEx {
         @Composable
         fun mainScreen() {
+            /*
             ConstraintLayout(Modifier.size(width = 350.dp, height = 220.dp)) {
                 val (button1, button2, button3) = createRefs()
 
@@ -62,7 +63,7 @@ class ConstraintLayout {
                         height = Dimension.fillToConstraints
                     }
                 )
-            }
+            }*/
         }
 
         @Composable
