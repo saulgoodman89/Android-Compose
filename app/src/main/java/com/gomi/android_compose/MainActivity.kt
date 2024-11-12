@@ -1,5 +1,6 @@
 package com.gomi.android_compose
 
+import android.content.Context
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -28,6 +29,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,8 +37,11 @@ import androidx.compose.ui.unit.sp
 import com.gomi.android_compose.ui.theme.AndroidComposeTheme
 
 class MainActivity : ComponentActivity() {
+    private var itemArray: Array<String>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        itemArray = resources.getStringArray(R.array.car_array)
+        val context : Context = this;
         enableEdgeToEdge()
         setContent {
             AndroidComposeTheme {
@@ -44,7 +49,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                         Column {
-                            ListAndGrid.ListAndGridEx.mainScreen()
+                            ListDemo.ListDemoEx.mainScreen(context,itemArray = itemArray as Array<out String>)
                         }
                 }
             }
