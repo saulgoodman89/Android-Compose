@@ -41,6 +41,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         itemArray = resources.getStringArray(R.array.car_array)
+        val navigation = NavigationDemo()
         val context : Context = this;
         enableEdgeToEdge()
         setContent {
@@ -49,7 +50,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                         Column {
-                            ListDemo.ListDemoEx.mainScreen(context,itemArray = itemArray as Array<out String>)
+                            navigation.mainScreen()
                         }
                 }
             }
