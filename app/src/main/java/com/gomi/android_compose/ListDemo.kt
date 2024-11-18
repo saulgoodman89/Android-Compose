@@ -3,7 +3,9 @@ package com.gomi.android_compose
 import android.content.Context
 import android.widget.Space
 import android.widget.Toast
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
@@ -28,16 +31,26 @@ import coil.compose.rememberImagePainter
 
 class ListDemo {
     object ListDemoEx {
+        @OptIn(ExperimentalFoundationApi::class)
         @Composable
         fun mainScreen(context : Context, itemArray: Array<out String>) {
-            val onListItemClick = {
-                text: String->
-                Toast.makeText(context,text,Toast.LENGTH_LONG)
+            val groupedItems = itemArray.groupBy { it.substringBefore((' ')) }
+            val onListItemClick = { text: String ->
+                Toast.makeText(context, text, Toast.LENGTH_LONG)
                     .show()
             }
             LazyColumn {
-                items(itemArray) {
-                    model-> myListItem(item = model,onListItemClick)
+                groupedItems.forEach { (manufacture, models) ->
+                    stickyHeader {
+                        Text(text=manufacture,
+                            color = Color.White,
+                            modifier = Modifier.background(Color.Gray)
+                                .padding(5.dp)
+                                .fillMaxWidth())
+                    }
+                    items(models) { model ->
+                        myListItem(item = model, onListItemClick)
+                    }
                 }
             }
         }
